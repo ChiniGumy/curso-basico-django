@@ -17,9 +17,11 @@ def detail(request, question_id):	# Detalle de una pregunta
 	})
 
 
-def results(request, question_id):	# Cantidad de votos de una pregunta
-	return HttpResponse(f'Estas viendo los resultados de la pregunta numero {question_id}')
-
+def results(request, question_id):	# Cantidad de votos de una pregunta\
+	question = get_object_or_404(Question, pk=question_id)
+	return render(request, 'polls/results.html', {
+		'question': question
+	})
 
 def votes(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
